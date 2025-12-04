@@ -119,7 +119,9 @@ class AdminTestCase(WebTest):
                 response = form.submit(status=200)
                 self.assertEqual(
                     str(response.context["errors"][0][0]),
-                    _("Mail template with this type and language already exists"),
+                    _(
+                        "Mail template with this type, language and domain already exists"
+                    ),
                 )
 
                 self.assertEqual(
