@@ -64,6 +64,8 @@ class MailTemplateManager(models.Manager):
             queryset = queryset.filter(Q(language=language) | Q(language="")).order_by(
                 "-language"
             )
+        else:
+            queryset = queryset.filter(language="")
 
         mail_template = queryset.first()
         if mail_template is None:
@@ -92,7 +94,7 @@ class MailTemplate(models.Model):
         blank=True,
         help_text="Leave empty for default template. Override to load a different template.",
     )
-    domain_id = models.IntegerField(null=False, default=1)
+    domain_id = models.IntegerField(default=1)
 
     objects = MailTemplateManager()
 

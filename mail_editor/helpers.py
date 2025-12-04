@@ -42,7 +42,7 @@ def find_template(template_name, language=None, domain_id=None):
         )
     else:
         base_qs = MailTemplate.objects.filter(
-            template_type=template_name, language__isnull=True, domain_id=domain_id
+            template_type=template_name, language="", domain_id=domain_id
         )
         if base_qs.exists():
             template = base_qs.first()

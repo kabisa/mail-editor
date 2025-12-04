@@ -23,7 +23,7 @@ class DomainIdTestCase(TestCase):
     def setUp(self):
         site_patch = patch("mail_editor.helpers.get_current_site")
         current_site_mock = site_patch.start()
-        current_site_mock.domain.return_value = "custom.domain.com"
+        current_site_mock.return_value.domain = "custom.domain.com"
 
     def tearDown(self):
         patch.stopall()
@@ -115,6 +115,7 @@ class DomainIdTestCase(TestCase):
             "test_template", domain_id=3, language="en"
         )
         self.assertEqual(retrieved.id, template_en.id)
+        self.assertNotEqual(retrieved.id, template_default.id)
 
     @override_settings(MAIL_EDITOR_CONF=CONFIG)
     def test_unique_constraint_with_domain(self):
@@ -136,7 +137,7 @@ class DomainIdTestCase(TestCase):
     def test_validation_unique_with_domain(self):
         """Test validation enforces uniqueness per domain"""
         # Create template
-        template1 = MailTemplate.objects.create(
+        MailTemplate.objects.create(
             template_type="test_template",
             language="en",
             domain_id=1,
