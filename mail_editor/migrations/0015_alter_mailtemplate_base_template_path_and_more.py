@@ -6,18 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mail_editor', '0014_mailtemplate_domain_id'),
+        ("mail_editor", "0014_mailtemplate_domain_id"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='mailtemplate',
-            name='base_template_path',
-            field=models.CharField(blank=True, default='', help_text='Leave empty for default template. Override to load a different template.', max_length=200, verbose_name='Base template path'),
+            model_name="mailtemplate",
+            name="base_template_path",
+            field=models.CharField(
+                blank=True,
+                default="",
+                help_text="Leave empty for default template. Override to load a different template.",
+                max_length=200,
+                verbose_name="Base template path",
+            ),
         ),
         migrations.AlterField(
-            model_name='mailtemplate',
-            name='language',
-            field=models.CharField(blank=True, default='', max_length=10),
+            model_name="mailtemplate",
+            name="language",
+            field=models.CharField(blank=True, default="", max_length=10),
         ),
     ]
