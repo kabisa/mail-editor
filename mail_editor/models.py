@@ -76,7 +76,7 @@ class MailTemplateManager(models.Manager):
 class MailTemplate(models.Model):
     internal_name = models.CharField(max_length=255, default="", blank=True)
     template_type = models.CharField(_("type"), max_length=50)
-    language = models.CharField(max_length=10, blank=True)
+    language = models.CharField(max_length=10, default="", blank=True)
 
     remarks = models.TextField(
         _("remarks"),
@@ -91,6 +91,7 @@ class MailTemplate(models.Model):
     base_template_path = models.CharField(
         _("Base template path"),
         max_length=200,
+        default="",
         blank=True,
         help_text="Leave empty for default template. Override to load a different template.",
     )
